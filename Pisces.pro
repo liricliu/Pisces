@@ -26,16 +26,16 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        pmainwin.cpp \
+        ui/pmainwin.cpp \
         thirdparty/qui/quiwidget.cpp
 
 HEADERS += \
-        pmainwin.h \
+        ui/pmainwin.h \
         thirdparty/qui/head.h \
         thirdparty/qui/quiwidget.h
 
 FORMS += \
-        pmainwin.ui
+        ui/pmainwin.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
