@@ -1,0 +1,33 @@
+[occupier]
+std{
+    uart1 alias stc8h.uart1;
+
+}
+
+stc8h{
+    uart1{
+        switch $IF_USE mutex{
+            option $USE;
+            option $NOT_USE;
+        }
+        switch $USE_PIN mutex rely not $NOT_USE{
+            option $PIN4_PIN6 occupy std.pin4,std.pin6;
+            option $PIN8_PIN10 occupy std.pin8,std.pin10;
+        }
+        
+    }
+}
+
+[resource]
+std{
+    pin0 nonshare;
+    clock
+}
+
+[label]
+USE = {
+    cn_smp : 启用
+    cn_trd : 啟用
+    jap : 使用
+    eng : 
+}

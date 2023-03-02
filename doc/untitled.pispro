@@ -1,0 +1,9 @@
+<pispro version="0.1">
+    <MCU name="STC8H" dbpath="cn.nightdust.standard/STC8H">
+        <std.uart use=1>
+        </std.uart>
+        
+        <std.pin>
+        </std.pin>
+    </MCU>
+</pispro>
