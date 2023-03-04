@@ -12,9 +12,11 @@ stc8h{
         }
         switch $USE_PIN mutex rely not $NOT_USE{
             option $PIN4_PIN6 occupy std.pin4,std.pin6;
-            option $PIN8_PIN10 occupy std.pin8,std.pin10;
+            option $PIN8_PIN10 occupy std.pin8,std.pin10 rely $;
         }
-        
+        input $LABEL int(0,65535) occupy checker;
+        input $LABEL1 ascii occupy checker;
+        input $LABEL2 utf8 occupy checker;
     }
 }
 
@@ -24,10 +26,14 @@ std{
     clock
 }
 
+[package]
+
 [label]
 USE = {
-    cn_smp : 启用
-    cn_trd : 啟用
+    smp : 启用
+    trd : 啟用
     jap : 使用
     eng : 
 }
+
+关键字：alias switch option mutex rely and not or input nonshare occupy

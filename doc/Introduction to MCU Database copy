@@ -1,0 +1,29 @@
+# Introduction to MCU Database
+
+> MCU Database for Pisces IDE is coded with a specific desciptional language. This document will introduce the way of coding database to you.
+
+## [] label
+MCU Database file is splited with [] label.
+
+[occupier] means option descriptions for peripherals follow
+
+[resource] means descriptions for resources occupied by peripherals follow, these will hint for conflicts among mutex peripherals.
+
+[label] means descriptions for translator follow.
+
+## namespace
+Namespace describes a set of peripherals. Usually, you should create a namespace for each MCU to include periperal descriptions on it. Format:
+
+```
+NameOfNamespace{
+    Descriptions for Peripherals...
+}
+```
+
+Pisces IDE retains a default namespace called *std*, in order to plug MCU descritions into standard hardware abstraction layer(Standard HAL).
+
+## std namespace
+Pisces standard library configures code with names and options in std namespace, which alias for custom peripheral namespaces. These peripheral namespaces should implement std options
+
+
+**Oh fucking Engish too troublesome, I'll compile it later.**

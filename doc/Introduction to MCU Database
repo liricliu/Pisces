@@ -1,0 +1,38 @@
+# MCU数据库编写指南
+
+> 双鱼座IDE的MCU数据库使用了一种特殊的描述语言来进行编写，本文将指导如何使用这种语言来编写MCU数据库
+
+## []标签
+MCU数据库使用[]标签来进行区域的分割。
+
+[occupier]代表接下来要描述的是片上外设的设置选项
+[resource]代表接下来要描述的是片上外设所需要占用的资源，这些资源的描述用于提示复用器件的冲突
+[label]代表接下来要描述的是用于翻译的替换词
+
+## 名称空间
+名称空间描述了一个片上外设的集合。一般地，你可以为一个MCU设置一个名称空间以包裹它所包含的片上外设。格式如下：
+```
+NameOfNamespace{
+    Descriptions for Peripherals...
+}
+```
+双鱼座IDE默认提供一个叫做std的名称空间，用于方便对接双鱼座标准硬件抽象层。
+
+## std名称空间
+std名称空间用于为片上外设设置别名。Pisces标准库中将使用std名称空间中设定的外设名称和设置选项名称来配置代码。实现了std标准外设设置选项的片上外设可以将std标准外设设置为别名。在std名称空间中使用语句：
+
+```
+NameOfStdPeripheral alias NameOfNamespace.NameOfPeripheral;
+```
+
+## 片上外设
+片上外设的描述置于名称空间的{}包裹的范围之内。格式如下：
+
+```
+NameOfPeripheral{
+    Descriptions for Peripheral options...
+}
+```
+
+## 片上外设选项
+片上外设选项的描述置于名称空间的{}包裹的范围之内。有两种选项，一种是下拉框式的switch，一种是输入式的input
