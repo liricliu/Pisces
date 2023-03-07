@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
     //QUIConfig::ReadConfig();
 
     QUIWidget qui;
-    PiscesMainWin *creator = new PiscesMainWin;
+    //PiscesMainWin *creator = new PiscesMainWin;
 
     //设置主窗体
-    qui.setMainWidget(creator);
+    //qui.setMainWidget(creator);
     //QObject::connect(&qui, SIGNAL(changeStyle(QString)), creator, SLOT(changeStyle(QString)));
     qui.setStyle(QUIWidget::Style::Style_FlatBlack);
     //设置标题

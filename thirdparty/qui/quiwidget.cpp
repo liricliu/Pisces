@@ -1060,8 +1060,8 @@ QUIWidget::QUIWidget(QWidget *parent) : QDialog(parent)
     this->initControl();
     this->initForm();
     setMouseTracking(true);
-    //setMainWidget(pmainwin);
-    //setMainWidget(pdebugform);
+    pmainwin=new PiscesMainWin;
+    setMainWidget(pmainwin);
 }
 
 QUIWidget::~QUIWidget()
@@ -1236,22 +1236,13 @@ void QUIWidget::initControl()
     btnMenu->setPopupMode(QToolButton::InstantPopup);
     horizontalLayout->addWidget(btnMenu);
 
-    widget = new QWidget(widgetMain);
+    widget = new QStackedWidget(widgetMain);
     widget->setObjectName(QString::fromUtf8("widget"));
     verticalLayout3 = new QVBoxLayout(widget);
     verticalLayout3->setSpacing(0);
     verticalLayout3->setContentsMargins(11, 11, 11, 11);
     verticalLayout3->setObjectName(QString::fromUtf8("verticalLayout3"));
     verticalLayout3->setContentsMargins(0, 0, 0, 0);
-    //PiscesMainWin* aaa=new PiscesMainWin;
-    //PiscesDebugForm* bbb=new PiscesDebugForm;
-    //verticalLayout2->addWidget(aaa);
-    //verticalLayout2->addWidget(bbb);
-    //pmainwin=new PiscesMainWin;
-    //pdebugform=new PiscesDebugForm;
-    //this->widget->layout()->addWidget(pmainwin);
-    //this->widget->layout()->addWidget(pdebugform);
-    //verticalLayout2->addWidget(widget);
     verticalLayout2->addWidget(widget);
     verticalLayout1->addWidget(widgetMain);
 
@@ -1404,14 +1395,10 @@ void QUIWidget::setMainWidget(QWidget *mainWidget)
 {
     //一个QUI窗体对象只能设置一个主窗体
     if (this->mainWidget != nullptr) {
-        //this->widget->layout()->removeWidget(mainWidget);
         return;
     }
     //将子窗体添加到布局
     this->widget->layout()->addWidget(mainWidget);
-    //自动设置大小
-    //resize(mainWidget->width(), mainWidget->height() - this->widgetTitle->height());
-
     this->mainWidget = mainWidget;
 }
 

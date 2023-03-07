@@ -2,6 +2,8 @@
 #define PMAINWIN_H
 
 #include <QMainWindow>
+#include "ui/pdebugform.h"
+#include "ui/pfileform.h"
 
 namespace Ui {
 class PiscesMainWin;
@@ -14,6 +16,8 @@ class PiscesMainWin : public QMainWindow
 public:
     explicit PiscesMainWin(QWidget *parent = nullptr);
     ~PiscesMainWin();
+    PiscesFileForm* fileform;
+    PiscesDebugForm* debugform;
 
 private:
     Ui::PiscesMainWin *ui;

@@ -285,7 +285,7 @@ private:
     QPushButton *btnDebugNav;
     QPushButton *btnAnalyzerNav;
 
-    QWidget *widget;
+    QStackedWidget *widget;
     QVBoxLayout *verticalLayout3;
 
 private:

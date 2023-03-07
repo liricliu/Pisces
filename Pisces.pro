@@ -28,12 +28,14 @@ SOURCES += \
         main.cpp \
         ui/paboutdialog.cpp \
         ui/pdebugform.cpp \
+        ui/pfileform.cpp \
         ui/pmainwin.cpp \
         thirdparty/qui/quiwidget.cpp
 
 HEADERS += \
         ui/paboutdialog.h \
         ui/pdebugform.h \
+        ui/pfileform.h \
         ui/pmainwin.h \
         thirdparty/qui/head.h \
         thirdparty/qui/quiwidget.h
@@ -41,6 +43,7 @@ HEADERS += \
 FORMS += \
         ui/paboutdialog.ui \
         ui/pdebugform.ui \
+        ui/pfileform.ui \
         ui/pmainwin.ui
 
 # Default rules for deployment.
