@@ -254,19 +254,34 @@ margin:0px;
 padding:3px 10px;
 }
 
-QMenu,QMenuBar,QMenu:disabled,QMenuBar:disabled{
+QMenu,QMenu:disabled{
 color:#BEC0C2;
 background-color:#404244;
 border:1px solid #67696B;
 border-radius: 3px;
 margin:0px;
-padding: 3px,3px;
+padding: 3px 3px;
 font-size: 12px;
+}
+
+QMenuBar,QMenuBar:disabled{
+    color:#BEC0C2;
+    background-color:#404244;
+    /*border:1px solid #67696B;*/
+    margin:0px;
+    padding: 3px 3px;
+    font-size: 12px;
+}
+
+QMenuBar::item{
+    padding:4px 15px;
+    margin:0px 0px;
+    border-radius: 3px;
 }
 
 QMenu::item{
 padding:4px 15px;
-margin:0px 3px;
+margin:0px 0px;
 border-radius: 3px;
 }
 

@@ -2,7 +2,7 @@
 #include "ui_pdebugform.h"
 
 PiscesDebugForm::PiscesDebugForm(QWidget *parent) :
-    QWidget(parent),
+    QMainWindow(parent),
     ui(new Ui::PiscesDebugForm)
 {
     ui->setupUi(this);

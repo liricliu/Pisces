@@ -30,7 +30,8 @@ SOURCES += \
         ui/pdebugform.cpp \
         ui/pfileform.cpp \
         ui/pmainwin.cpp \
-        thirdparty/qui/quiwidget.cpp
+        thirdparty/qui/quiwidget.cpp \
+        ui/pmcucfgform.cpp
 
 HEADERS += \
         ui/paboutdialog.h \
@@ -38,13 +39,15 @@ HEADERS += \
         ui/pfileform.h \
         ui/pmainwin.h \
         thirdparty/qui/head.h \
-        thirdparty/qui/quiwidget.h
+        thirdparty/qui/quiwidget.h \
+        ui/pmcucfgform.h
 
 FORMS += \
         ui/paboutdialog.ui \
         ui/pdebugform.ui \
         ui/pfileform.ui \
-        ui/pmainwin.ui
+        ui/pmainwin.ui \
+        ui/pmcucfgform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

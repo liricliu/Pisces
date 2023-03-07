@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "ui/pdebugform.h"
 #include "ui/pfileform.h"
+#include "ui/pmcucfgform.h"
 
 namespace Ui {
 class PiscesMainWin;
@@ -18,6 +19,8 @@ public:
     ~PiscesMainWin();
     PiscesFileForm* fileform;
     PiscesDebugForm* debugform;
+    PiscesMCUCfgForm* mcucfgform;
+    void setIndex(int x);
 
 private:
     Ui::PiscesMainWin *ui;

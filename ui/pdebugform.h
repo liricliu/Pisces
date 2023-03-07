@@ -1,13 +1,13 @@
 #ifndef PDEBUGFORM_H
 #define PDEBUGFORM_H
 
-#include <QWidget>
+#include <QMainWindow>
 
 namespace Ui {
 class PiscesDebugForm;
 }
 
-class PiscesDebugForm : public QWidget
+class PiscesDebugForm : public QMainWindow
 {
     Q_OBJECT
 

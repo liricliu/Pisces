@@ -32,7 +32,6 @@
  */
 
 #include "head.h"
-#include "ui/pdebugform.h"
 #include "ui/pmainwin.h"
 
 #ifdef quc
@@ -267,7 +266,6 @@ protected:
 private:
 
     PiscesMainWin* pmainwin;
-    PiscesDebugForm* pdebugform;
 
     QVBoxLayout *verticalLayout1;
     QWidget *widgetMain;
@@ -286,7 +284,6 @@ private:
     QPushButton *btnAnalyzerNav;
 
     QStackedWidget *widget;
-    QVBoxLayout *verticalLayout3;
 
 private:
     bool max;                       //是否处于最大化状态

@@ -1060,12 +1060,11 @@ QUIWidget::QUIWidget(QWidget *parent) : QDialog(parent)
     this->initControl();
     this->initForm();
     setMouseTracking(true);
-    pmainwin=new PiscesMainWin;
-    setMainWidget(pmainwin);
 }
 
 QUIWidget::~QUIWidget()
 {
+    delete pmainwin;
     delete widgetMain;
 }
 
@@ -1236,16 +1235,16 @@ void QUIWidget::initControl()
     btnMenu->setPopupMode(QToolButton::InstantPopup);
     horizontalLayout->addWidget(btnMenu);
 
+    //设置导航栏
     widget = new QStackedWidget(widgetMain);
     widget->setObjectName(QString::fromUtf8("widget"));
-    verticalLayout3 = new QVBoxLayout(widget);
-    verticalLayout3->setSpacing(0);
-    verticalLayout3->setContentsMargins(11, 11, 11, 11);
-    verticalLayout3->setObjectName(QString::fromUtf8("verticalLayout3"));
-    verticalLayout3->setContentsMargins(0, 0, 0, 0);
+
+    pmainwin=new PiscesMainWin;
+
+    widget->addWidget(pmainwin);
+
     verticalLayout2->addWidget(widget);
     verticalLayout1->addWidget(widgetMain);
-
 
     //设置点击事件
     connect(this->btnFileNav,&QPushButton::clicked,this,&QUIWidget::onLeftNavClicked);
@@ -1258,7 +1257,6 @@ void QUIWidget::initControl()
 void QUIWidget::initForm()
 {
     //设置图形字体
-    //setIcon(QUIWidget::Lab_Ico, QUIConfig::IconMain, 11);
     IconHelper::Instance()->setIcon(this->btnMenu,QChar(0xf185), 26);
     IconHelper::Instance()->setIcon(this->btnFileNav,QChar(0xf121), 26);
     IconHelper::Instance()->setIcon(this->btnMCUCfgNav,QChar(0xf2db), 26);
@@ -1363,7 +1361,6 @@ void QUIWidget::setTitleHeight(int height)
 
 void QUIWidget::setBtnWidth(int width)
 {
-    //this->labIco->setFixedWidth(width);
     this->btnMenu->setFixedWidth(width);
 }
 
@@ -1394,11 +1391,11 @@ void QUIWidget::setMinHide(bool minHide)
 void QUIWidget::setMainWidget(QWidget *mainWidget)
 {
     //一个QUI窗体对象只能设置一个主窗体
-    if (this->mainWidget != nullptr) {
-        return;
-    }
+    //if (this->mainWidget != nullptr) {
+    //    return;
+    //}
     //将子窗体添加到布局
-    this->widget->layout()->addWidget(mainWidget);
+    this->widget->addWidget(mainWidget);
     this->mainWidget = mainWidget;
 }
 
@@ -1410,19 +1407,20 @@ void QUIWidget::onLeftNavClicked(){
     btnProjCfgNav->setChecked(false);
     btn->setChecked(true);
     if(btn==btnFileNav){
-        //setMainWidget(pmainwin);
+        pmainwin->setIndex(0);
     }else if (btn==btnDebugNav) {
-        //setMainWidget(pdebugform);
+        pmainwin->setIndex(2);
     }else if (btn==btnMCUCfgNav){
-
+        pmainwin->setIndex(1);
     }else if (btn==btnProjCfgNav) {
-
+        pmainwin->setIndex(3);
     }
 }
 
 void QUIWidget::setMax(){
     location = this->geometry();
-    this->setGeometry(0,0,qApp->desktop()->availableGeometry().width(),qApp->desktop()->availableGeometry().height()-style()->pixelMetric(QStyle::PM_TitleBarHeight));
+    location.setHeight(location.height()-style()->pixelMetric(QStyle::PM_TitleBarHeight));
+    this->setGeometry(location);
     max=true;
 }
 
