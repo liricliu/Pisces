@@ -1141,6 +1141,7 @@ QSize QUIWidget::minimumSizeHint() const
 void QUIWidget::initControl()
 {
     this->setObjectName(QString::fromUtf8("QUIWidget"));
+    this->setTitle("Pisces");
     this->resize(900, 750);
     this->setMinimumHeight(300);
     verticalLayout1 = new QVBoxLayout(this);
@@ -1264,7 +1265,7 @@ void QUIWidget::initForm()
     this->setWindowFlags((Qt::WindowSystemMenuHint | Qt::WindowMinMaxButtonsHint));
 
     //设置标题及对齐方式
-    title = "QUI Demo";
+    title = "Pisces";
     alignment = Qt::AlignLeft | Qt::AlignVCenter;
     minHide = false;
     mainWidget = 0;

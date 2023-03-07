@@ -258,11 +258,16 @@ QMenu,QMenuBar,QMenu:disabled,QMenuBar:disabled{
 color:#BEC0C2;
 background-color:#404244;
 border:1px solid #67696B;
+border-radius: 3px;
 margin:0px;
+padding: 3px,3px;
+font-size: 12px;
 }
 
 QMenu::item{
-padding:3px 20px;
+padding:4px 15px;
+margin:0px 3px;
+border-radius: 3px;
 }
 
 QMenu::indicator{
