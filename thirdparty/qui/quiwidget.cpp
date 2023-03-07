@@ -1278,7 +1278,7 @@ void QUIWidget::initForm()
     this->location = this->geometry();
     this->setProperty("form", true);
     this->widgetTitle->setProperty("form", "title");
-    this->setWindowFlags((Qt::WindowSystemMenuHint | Qt::WindowMinMaxButtonsHint));
+    this->setWindowFlags((Qt::WindowSystemMenuHint | Qt::WindowMinMaxButtonsHint|Qt::WindowCloseButtonHint));
 
     //设置标题及对齐方式
     title = "Pisces";
@@ -1410,7 +1410,7 @@ void QUIWidget::setMainWidget(QWidget *mainWidget)
     //将子窗体添加到布局
     this->widget->layout()->addWidget(mainWidget);
     //自动设置大小
-    resize(mainWidget->width(), mainWidget->height() + this->widgetTitle->height());
+    //resize(mainWidget->width(), mainWidget->height() - this->widgetTitle->height());
 
     this->mainWidget = mainWidget;
 }
@@ -1435,8 +1435,7 @@ void QUIWidget::onLeftNavClicked(){
 
 void QUIWidget::setMax(){
     location = this->geometry();
-    this->setGeometry(qApp->desktop()->availableGeometry());
-    setIcon(QUIWidget::BtnMenu_Max, QUIConfig::IconMax);
+    this->setGeometry(0,0,qApp->desktop()->availableGeometry().width(),qApp->desktop()->availableGeometry().height()-style()->pixelMetric(QStyle::PM_TitleBarHeight));
     max=true;
 }
 
