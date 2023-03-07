@@ -656,6 +656,16 @@ background:#2E2F30;
 border-color:#404244;
 }
 
+QDockWidget{
+    background-color: #67696B;
+}
+
+QDockWidget::title{
+    background: #67696B;
+    padding: 3px 3px 3px 10%;
+}
+
+
 /*TextColor:#BEC0C2*/
 /*PanelColor:#2E2F30*/
 /*BorderColor:#67696B*/
