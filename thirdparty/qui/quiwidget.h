@@ -32,6 +32,8 @@
  */
 
 #include "head.h"
+#include "ui/pdebugform.h"
+#include "ui/pmainwin.h"
 
 #ifdef quc
 #if (QT_VERSION < QT_VERSION_CHECK(5,7,0))
@@ -263,6 +265,10 @@ protected:
     bool eventFilter(QObject *obj, QEvent *evt);
 
 private:
+
+    PiscesMainWin* pmainwin;
+    PiscesDebugForm* pdebugform;
+
     QVBoxLayout *verticalLayout1;
     QWidget *widgetMain;
     QHBoxLayout *verticalLayout2;
@@ -309,7 +315,7 @@ public:
 private slots:
     void initControl();             //初始化控件
     void initForm();                //初始化窗体
-    void changeStyle();             //更换样式
+    void onSettingClicked();        //设置菜单响应
 
 private slots:
     void onLeftNavClicked();

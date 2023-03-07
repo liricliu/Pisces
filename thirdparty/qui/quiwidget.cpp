@@ -1,4 +1,5 @@
 ﻿#include "thirdparty/qui/quiwidget.h"
+#include "ui/paboutdialog.h"
 
 int QUIWidget::deskWidth()
 {
@@ -1059,6 +1060,8 @@ QUIWidget::QUIWidget(QWidget *parent) : QDialog(parent)
     this->initControl();
     this->initForm();
     setMouseTracking(true);
+    //setMainWidget(pmainwin);
+    //setMainWidget(pdebugform);
 }
 
 QUIWidget::~QUIWidget()
@@ -1188,24 +1191,28 @@ void QUIWidget::initControl()
     btnFileNav->setFocusPolicy(Qt::NoFocus);
     btnFileNav->setCheckable(true);
     btnFileNav->setChecked(true);
+    btnFileNav->setWhatsThis("文件");
     horizontalLayout->addWidget(btnFileNav);
 
     btnMCUCfgNav=new QPushButton(widgetMenu);
     btnMCUCfgNav->setObjectName("btnMCUCfgNav");
     btnMCUCfgNav->setFocusPolicy(Qt::NoFocus);
     btnMCUCfgNav->setCheckable(true);
+    btnMCUCfgNav->setWhatsThis("MCU配置");
     horizontalLayout->addWidget(btnMCUCfgNav);
 
     btnDebugNav=new QPushButton(widgetMenu);
     btnDebugNav->setObjectName("btnDebugNav");
     btnDebugNav->setFocusPolicy(Qt::NoFocus);
     btnDebugNav->setCheckable(true);
+    btnDebugNav->setWhatsThis("调试器");
     horizontalLayout->addWidget(btnDebugNav);
 
     btnProjCfgNav =new QPushButton(widgetMenu);
     btnProjCfgNav->setObjectName("btnProjCfgNav");
     btnProjCfgNav->setFocusPolicy(Qt::NoFocus);
     btnProjCfgNav->setCheckable(true);
+    btnProjCfgNav->setWhatsThis("工程设置");
     horizontalLayout->addWidget(btnProjCfgNav);
 
     verticalLayout2->addWidget(widgetTitle);
@@ -1217,6 +1224,7 @@ void QUIWidget::initControl()
 
     btnMenu = new QToolButton(widgetMenu);
     btnMenu->setObjectName(QString::fromUtf8("btnMenu"));
+    btnMenu->setWhatsThis("管理");
     QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
     sizePolicy3.setHorizontalStretch(0);
     sizePolicy3.setVerticalStretch(0);
@@ -1235,7 +1243,15 @@ void QUIWidget::initControl()
     verticalLayout3->setContentsMargins(11, 11, 11, 11);
     verticalLayout3->setObjectName(QString::fromUtf8("verticalLayout3"));
     verticalLayout3->setContentsMargins(0, 0, 0, 0);
-
+    //PiscesMainWin* aaa=new PiscesMainWin;
+    //PiscesDebugForm* bbb=new PiscesDebugForm;
+    //verticalLayout2->addWidget(aaa);
+    //verticalLayout2->addWidget(bbb);
+    //pmainwin=new PiscesMainWin;
+    //pdebugform=new PiscesDebugForm;
+    //this->widget->layout()->addWidget(pmainwin);
+    //this->widget->layout()->addWidget(pdebugform);
+    //verticalLayout2->addWidget(widget);
     verticalLayout2->addWidget(widget);
     verticalLayout1->addWidget(widgetMain);
 
@@ -1279,62 +1295,29 @@ void QUIWidget::initForm()
     //添加设置菜单
     QStringList name;
     name << "关于Pisces"<<"偏好设置";
-
+    QStringList nameid;
+    nameid << "a"<<"p";
+    int indexforloop=0;
     foreach (QString str, name) {
         QAction *action = new QAction(str, this);
+        action->setObjectName(nameid[indexforloop]);
         this->btnMenu->addAction(action);
-        connect(action, SIGNAL(triggered(bool)), this, SLOT(changeStyle()));
+        connect(action, SIGNAL(triggered(bool)), this, SLOT(onSettingClicked()));
+        indexforloop++;
     }
 }
 
-void QUIWidget::changeStyle()
+void QUIWidget::onSettingClicked()
 {
     QAction *act = (QAction *)sender();
-    QString name = act->text();
-    QString qssFile = ":/qss/blue.css";
-
-    if (name == "银色") {
-        qssFile = ":/qss/silvery.css";
-        setStyle(QUIWidget::Style_Silvery);
-    } else if (name == "蓝色") {
-        qssFile = ":/qss/blue.css";
-        setStyle(QUIWidget::Style_Blue);
-    } else if (name == "浅蓝色") {
-        qssFile = ":/qss/lightblue.css";
-        setStyle(QUIWidget::Style_LightBlue);
-    } else if (name == "深蓝色") {
-        qssFile = ":/qss/darkblue.css";
-        setStyle(QUIWidget::Style_DarkBlue);
-    } else if (name == "灰色") {
-        qssFile = ":/qss/gray.css";
-        setStyle(QUIWidget::Style_Gray);
-    } else if (name == "浅灰色") {
-        qssFile = ":/qss/lightgray.css";
-        setStyle(QUIWidget::Style_LightGray);
-    } else if (name == "深灰色") {
-        qssFile = ":/qss/darkgray.css";
-        setStyle(QUIWidget::Style_DarkGray);
-    } else if (name == "黑色") {
-        qssFile = ":/qss/black.css";
-        setStyle(QUIWidget::Style_Black);
-    } else if (name == "浅黑色") {
-        qssFile = ":/qss/lightblack.css";
-        setStyle(QUIWidget::Style_LightBlack);
-    } else if (name == "深黑色") {
-        qssFile = ":/qss/darkblack.css";
-        setStyle(QUIWidget::Style_DarkBlack);
-    } else if (name == "PS黑色") {
-        qssFile = ":/qss/psblack.css";
-        setStyle(QUIWidget::Style_PSBlack);
-    } else if (name == "黑色扁平") {
-        qssFile = ":/qss/flatblack.css";
-        setStyle(QUIWidget::Style_FlatBlack);
-    } else if (name == "白色扁平") {
-        qssFile = ":/qss/flatwhite.css";
-        setStyle(QUIWidget::Style_FlatWhite);
+    if(act->objectName()=="a"){
+        PiscesAboutDialog a;
+        a.exec();
+    }else if (act->objectName()=="p") {
+        //printf("preference");
+        showMessageBoxInfo("设置");
     }
 
-    emit changeStyle(qssFile);
 }
 
 void QUIWidget::setIcon(QUIWidget::Widget widget, QChar str, quint32 size)
@@ -1420,14 +1403,16 @@ void QUIWidget::setMinHide(bool minHide)
 void QUIWidget::setMainWidget(QWidget *mainWidget)
 {
     //一个QUI窗体对象只能设置一个主窗体
-    if (this->mainWidget == 0) {
-        //将子窗体添加到布局
-        this->widget->layout()->addWidget(mainWidget);
-        //自动设置大小
-        resize(mainWidget->width(), mainWidget->height() + this->widgetTitle->height());
-
-        this->mainWidget = mainWidget;
+    if (this->mainWidget != nullptr) {
+        //this->widget->layout()->removeWidget(mainWidget);
+        return;
     }
+    //将子窗体添加到布局
+    this->widget->layout()->addWidget(mainWidget);
+    //自动设置大小
+    resize(mainWidget->width(), mainWidget->height() + this->widgetTitle->height());
+
+    this->mainWidget = mainWidget;
 }
 
 void QUIWidget::onLeftNavClicked(){
@@ -1437,6 +1422,15 @@ void QUIWidget::onLeftNavClicked(){
     btnMCUCfgNav->setChecked(false);
     btnProjCfgNav->setChecked(false);
     btn->setChecked(true);
+    if(btn==btnFileNav){
+        //setMainWidget(pmainwin);
+    }else if (btn==btnDebugNav) {
+        //setMainWidget(pdebugform);
+    }else if (btn==btnMCUCfgNav){
+
+    }else if (btn==btnProjCfgNav) {
+
+    }
 }
 
 void QUIWidget::setMax(){
