@@ -1093,11 +1093,11 @@ bool QUIWidget::eventFilter(QObject *obj, QEvent *evt)
         }
     } else if (event->type() == QEvent::MouseButtonDblClick) {
         //以下写法可以将双击识别限定在标题栏
-        if (this->btnMenu_Max->isVisible() && obj == this->widgetTitle) {
+        //if (this->btnMenu_Max->isVisible() && obj == this->widgetTitle) {
         //if (this->btnMenu_Max->isVisible()) {
-            this->on_btnMenu_Max_clicked();
+        //    this->on_btnMenu_Max_clicked();
             return true;
-        }
+        //}
     }
 
     return QWidget::eventFilter(obj, evt);
@@ -1105,32 +1105,17 @@ bool QUIWidget::eventFilter(QObject *obj, QEvent *evt)
 
 QLabel *QUIWidget::getLabIco() const
 {
-    return this->labIco;
+    //return this->labIco;
 }
 
 QLabel *QUIWidget::getLabTitle() const
 {
-    return this->labTitle;
+    //return this->labTitle;
 }
 
 QToolButton *QUIWidget::getBtnMenu() const
 {
     return this->btnMenu;
-}
-
-QPushButton *QUIWidget::getBtnMenuMin() const
-{
-    return this->btnMenu_Min;
-}
-
-QPushButton *QUIWidget::getBtnMenuMax() const
-{
-    return this->btnMenu_Max;
-}
-
-QPushButton *QUIWidget::getBtnMenuMClose() const
-{
-    return this->btnMenu_Close;
 }
 
 QString QUIWidget::getTitle() const
@@ -1157,6 +1142,7 @@ void QUIWidget::initControl()
 {
     this->setObjectName(QString::fromUtf8("QUIWidget"));
     this->resize(900, 750);
+    this->setMinimumHeight(300);
     verticalLayout1 = new QVBoxLayout(this);
     verticalLayout1->setSpacing(0);
     verticalLayout1->setContentsMargins(11, 11, 11, 11);
@@ -1165,107 +1151,81 @@ void QUIWidget::initControl()
     widgetMain = new QWidget(this);
     widgetMain->setObjectName(QString::fromUtf8("widgetMain"));
     widgetMain->setStyleSheet(QString::fromUtf8(""));
-    verticalLayout2 = new QVBoxLayout(widgetMain);
+    verticalLayout2 = new QHBoxLayout(widgetMain);
     verticalLayout2->setSpacing(0);
     verticalLayout2->setContentsMargins(11, 11, 11, 11);
     verticalLayout2->setObjectName(QString::fromUtf8("verticalLayout2"));
     verticalLayout2->setContentsMargins(0, 0, 0, 0);
     widgetTitle = new QWidget(widgetMain);
     widgetTitle->setObjectName(QString::fromUtf8("widgetTitle"));
-    QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+    QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
     sizePolicy.setHorizontalStretch(0);
     sizePolicy.setVerticalStretch(0);
-    sizePolicy.setHeightForWidth(widgetTitle->sizePolicy().hasHeightForWidth());
+    sizePolicy.setWidthForHeight(widgetTitle->sizePolicy().hasWidthForHeight());
     widgetTitle->setSizePolicy(sizePolicy);
-    widgetTitle->setMinimumSize(QSize(0, 30));
-    horizontalLayout4 = new QHBoxLayout(widgetTitle);
-    horizontalLayout4->setSpacing(0);
-    horizontalLayout4->setContentsMargins(11, 11, 11, 11);
-    horizontalLayout4->setObjectName(QString::fromUtf8("horizontalLayout4"));
-    horizontalLayout4->setContentsMargins(0, 0, 0, 0);
-    labIco = new QLabel(widgetTitle);
-    labIco->setObjectName(QString::fromUtf8("labIco"));
-    QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Preferred);
+    widgetTitle->setMinimumSize(QSize(30, 0));
+    widgetTitle->setProperty("nav","left");
+
+    QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
     sizePolicy1.setHorizontalStretch(0);
     sizePolicy1.setVerticalStretch(0);
-    sizePolicy1.setHeightForWidth(labIco->sizePolicy().hasHeightForWidth());
-    labIco->setSizePolicy(sizePolicy1);
-    labIco->setMinimumSize(QSize(30, 0));
-    labIco->setAlignment(Qt::AlignCenter);
-
-    horizontalLayout4->addWidget(labIco);
-
-    labTitle = new QLabel(widgetTitle);
-    labTitle->setObjectName(QString::fromUtf8("labTitle"));
-    QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    sizePolicy2.setHorizontalStretch(0);
-    sizePolicy2.setVerticalStretch(0);
-    sizePolicy2.setHeightForWidth(labTitle->sizePolicy().hasHeightForWidth());
-    labTitle->setSizePolicy(sizePolicy2);
-    labTitle->setAlignment(Qt::AlignLeading | Qt::AlignLeft | Qt::AlignVCenter);
-
-    horizontalLayout4->addWidget(labTitle);
 
     widgetMenu = new QWidget(widgetTitle);
     widgetMenu->setObjectName(QString::fromUtf8("widgetMenu"));
     sizePolicy1.setHeightForWidth(widgetMenu->sizePolicy().hasHeightForWidth());
     widgetMenu->setSizePolicy(sizePolicy1);
-    horizontalLayout = new QHBoxLayout(widgetMenu);
+    horizontalLayout = new QVBoxLayout(widgetTitle);
     horizontalLayout->setSpacing(0);
     horizontalLayout->setContentsMargins(11, 11, 11, 11);
     horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
     horizontalLayout->setContentsMargins(0, 0, 0, 0);
+
+
+    //放置导航栏
+    btnFileNav=new QPushButton(widgetMenu);
+    btnFileNav->setObjectName("btnFileNav");
+    btnFileNav->setFocusPolicy(Qt::NoFocus);
+    btnFileNav->setCheckable(true);
+    btnFileNav->setChecked(true);
+    horizontalLayout->addWidget(btnFileNav);
+
+    btnMCUCfgNav=new QPushButton(widgetMenu);
+    btnMCUCfgNav->setObjectName("btnMCUCfgNav");
+    btnMCUCfgNav->setFocusPolicy(Qt::NoFocus);
+    btnMCUCfgNav->setCheckable(true);
+    horizontalLayout->addWidget(btnMCUCfgNav);
+
+    btnDebugNav=new QPushButton(widgetMenu);
+    btnDebugNav->setObjectName("btnDebugNav");
+    btnDebugNav->setFocusPolicy(Qt::NoFocus);
+    btnDebugNav->setCheckable(true);
+    horizontalLayout->addWidget(btnDebugNav);
+
+    btnProjCfgNav =new QPushButton(widgetMenu);
+    btnProjCfgNav->setObjectName("btnProjCfgNav");
+    btnProjCfgNav->setFocusPolicy(Qt::NoFocus);
+    btnProjCfgNav->setCheckable(true);
+    horizontalLayout->addWidget(btnProjCfgNav);
+
+    verticalLayout2->addWidget(widgetTitle);
+
+
+    //放置弹簧
+    verticalSpacer = new QSpacerItem(20, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    horizontalLayout->addItem(verticalSpacer);
+
     btnMenu = new QToolButton(widgetMenu);
     btnMenu->setObjectName(QString::fromUtf8("btnMenu"));
-    QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
     sizePolicy3.setHorizontalStretch(0);
     sizePolicy3.setVerticalStretch(0);
     sizePolicy3.setHeightForWidth(btnMenu->sizePolicy().hasHeightForWidth());
     btnMenu->setSizePolicy(sizePolicy3);
-    btnMenu->setMinimumSize(QSize(30, 0));
-    btnMenu->setMaximumSize(QSize(30, 16777215));
+    btnMenu->setMinimumSize(QSize(60, 60));
+    btnMenu->setMaximumSize(QSize(60, 16777215));
     btnMenu->setFocusPolicy(Qt::NoFocus);
     btnMenu->setPopupMode(QToolButton::InstantPopup);
-
     horizontalLayout->addWidget(btnMenu);
-
-    btnMenu_Min = new QPushButton(widgetMenu);
-    btnMenu_Min->setObjectName(QString::fromUtf8("btnMenu_Min"));
-    QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Expanding);
-    sizePolicy4.setHorizontalStretch(0);
-    sizePolicy4.setVerticalStretch(0);
-    sizePolicy4.setHeightForWidth(btnMenu_Min->sizePolicy().hasHeightForWidth());
-    btnMenu_Min->setSizePolicy(sizePolicy4);
-    btnMenu_Min->setMinimumSize(QSize(30, 0));
-    btnMenu_Min->setMaximumSize(QSize(30, 16777215));
-    btnMenu_Min->setCursor(QCursor(Qt::ArrowCursor));
-    btnMenu_Min->setFocusPolicy(Qt::NoFocus);
-
-    horizontalLayout->addWidget(btnMenu_Min);
-
-    btnMenu_Max = new QPushButton(widgetMenu);
-    btnMenu_Max->setObjectName(QString::fromUtf8("btnMenu_Max"));
-    sizePolicy3.setHeightForWidth(btnMenu_Max->sizePolicy().hasHeightForWidth());
-    btnMenu_Max->setSizePolicy(sizePolicy3);
-    btnMenu_Max->setMinimumSize(QSize(30, 0));
-    btnMenu_Max->setMaximumSize(QSize(30, 16777215));
-    btnMenu_Max->setCursor(QCursor(Qt::ArrowCursor));
-    btnMenu_Max->setFocusPolicy(Qt::NoFocus);
-
-    horizontalLayout->addWidget(btnMenu_Max);
-
-    btnMenu_Close = new QPushButton(widgetMenu);
-    btnMenu_Close->setObjectName(QString::fromUtf8("btnMenu_Close"));
-    sizePolicy3.setHeightForWidth(btnMenu_Close->sizePolicy().hasHeightForWidth());
-    btnMenu_Close->setSizePolicy(sizePolicy3);
-    btnMenu_Close->setMinimumSize(QSize(30, 0));
-    btnMenu_Close->setMaximumSize(QSize(30, 16777215));
-    btnMenu_Close->setCursor(QCursor(Qt::ArrowCursor));
-    btnMenu_Close->setFocusPolicy(Qt::NoFocus);
-
-    horizontalLayout->addWidget(btnMenu_Close);
-    horizontalLayout4->addWidget(widgetMenu);
-    verticalLayout2->addWidget(widgetTitle);
 
     widget = new QWidget(widgetMain);
     widget->setObjectName(QString::fromUtf8("widget"));
@@ -1278,19 +1238,24 @@ void QUIWidget::initControl()
     verticalLayout2->addWidget(widget);
     verticalLayout1->addWidget(widgetMain);
 
-    connect(this->btnMenu_Min, SIGNAL(clicked(bool)), this, SLOT(on_btnMenu_Min_clicked()));
-    connect(this->btnMenu_Max, SIGNAL(clicked(bool)), this, SLOT(on_btnMenu_Max_clicked()));
-    connect(this->btnMenu_Close, SIGNAL(clicked(bool)), this, SLOT(on_btnMenu_Close_clicked()));
+
+    //设置点击事件
+    connect(this->btnFileNav,&QPushButton::clicked,this,&QUIWidget::onLeftNavClicked);
+    connect(this->btnMCUCfgNav,&QPushButton::clicked,this,&QUIWidget::onLeftNavClicked);
+    connect(this->btnDebugNav,&QPushButton::clicked,this,&QUIWidget::onLeftNavClicked);
+    connect(this->btnProjCfgNav,&QPushButton::clicked,this,&QUIWidget::onLeftNavClicked);
+
 }
 
 void QUIWidget::initForm()
 {
     //设置图形字体
-    setIcon(QUIWidget::Lab_Ico, QUIConfig::IconMain, 11);
-    setIcon(QUIWidget::BtnMenu, QUIConfig::IconMenu);
-    setIcon(QUIWidget::BtnMenu_Min, QUIConfig::IconMin);
-    setIcon(QUIWidget::BtnMenu_Normal, QUIConfig::IconNormal);
-    setIcon(QUIWidget::BtnMenu_Close, QUIConfig::IconClose);
+    //setIcon(QUIWidget::Lab_Ico, QUIConfig::IconMain, 11);
+    IconHelper::Instance()->setIcon(this->btnMenu,QChar(0xf185), 26);
+    IconHelper::Instance()->setIcon(this->btnFileNav,QChar(0xf121), 26);
+    IconHelper::Instance()->setIcon(this->btnMCUCfgNav,QChar(0xf2db), 26);
+    IconHelper::Instance()->setIcon(this->btnDebugNav,QChar(0xf188), 26);
+    IconHelper::Instance()->setIcon(this->btnProjCfgNav,QChar(0xf16e), 26);
 
     this->max = false;
     this->location = this->geometry();
@@ -1310,10 +1275,9 @@ void QUIWidget::initForm()
     this->installEventFilter(this);
     this->widgetTitle->installEventFilter(this);
 
-    //添加换肤菜单
+    //添加设置菜单
     QStringList name;
-    name << "银色" << "蓝色" << "浅蓝色" << "深蓝色" << "灰色" << "浅灰色" << "深灰色" << "黑色"
-         << "浅黑色" << "深黑色" << "PS黑色" << "黑色扁平" << "白色扁平";
+    name << "关于Pisces"<<"偏好设置";
 
     foreach (QString str, name) {
         QAction *action = new QAction(str, this);
@@ -1379,25 +1343,13 @@ void QUIWidget::setIcon(QUIWidget::Widget widget, QChar str, quint32 size)
     } else if (widget == QUIWidget::BtnMenu) {
         QUIConfig::IconMenu = str;
         IconHelper::Instance()->setIcon(this->btnMenu, str, size);
-    } else if (widget == QUIWidget::BtnMenu_Min) {
-        QUIConfig::IconMin = str;
-        IconHelper::Instance()->setIcon(this->btnMenu_Min, str, size);
-    } else if (widget == QUIWidget::BtnMenu_Max) {
-        QUIConfig::IconMax = str;
-        IconHelper::Instance()->setIcon(this->btnMenu_Max, str, size);
-    } else if (widget == QUIWidget::BtnMenu_Normal) {
-        QUIConfig::IconNormal = str;
-        IconHelper::Instance()->setIcon(this->btnMenu_Max, str, size);
-    } else if (widget == QUIWidget::BtnMenu_Close) {
-        QUIConfig::IconClose = str;
-        IconHelper::Instance()->setIcon(this->btnMenu_Close, str, size);
     }
 }
 
 void QUIWidget::setIconMain(QChar str, quint32 size)
 {
     QUIConfig::IconMain = str;
-    IconHelper::Instance()->setIcon(this->labIco, str, size);
+    //IconHelper::Instance()->setIcon(this->labIco, str, size);
     QUIMessageBox::Instance()->setIconMain(str, size);
     QUIInputBox::Instance()->setIconMain(str, size);
 }
@@ -1409,60 +1361,43 @@ void QUIWidget::setPixmap(QUIWidget::Widget widget, const QString &file, const Q
     pix = pix.scaled(size, Qt::KeepAspectRatio);
 
     if (widget == QUIWidget::Lab_Ico) {
-        this->labIco->setPixmap(pix);
+        //this->labIco->setPixmap(pix);
     } else if (widget == QUIWidget::BtnMenu) {
         this->btnMenu->setIcon(QIcon(file));
-    } else if (widget == QUIWidget::BtnMenu_Min) {
-        this->btnMenu_Min->setIcon(QIcon(file));
-    } else if (widget == QUIWidget::BtnMenu_Max) {
-        this->btnMenu_Max->setIcon(QIcon(file));
-    } else if (widget == QUIWidget::BtnMenu_Close) {
-        this->btnMenu_Close->setIcon(QIcon(file));
     }
 }
 
 void QUIWidget::setVisible(QUIWidget::Widget widget, bool visible)
 {
     if (widget == QUIWidget::Lab_Ico) {
-        this->labIco->setVisible(visible);
+        //this->labIco->setVisible(visible);
     } else if (widget == QUIWidget::BtnMenu) {
         this->btnMenu->setVisible(visible);
-    } else if (widget == QUIWidget::BtnMenu_Min) {
-        this->btnMenu_Min->setVisible(visible);
-    } else if (widget == QUIWidget::BtnMenu_Max) {
-        this->btnMenu_Max->setVisible(visible);
-    } else if (widget == QUIWidget::BtnMenu_Close) {
-        this->btnMenu_Close->setVisible(visible);
     }
 }
 
 void QUIWidget::setOnlyCloseBtn()
 {
     this->btnMenu->setVisible(false);
-    this->btnMenu_Min->setVisible(false);
-    this->btnMenu_Max->setVisible(false);
 }
 
 void QUIWidget::setTitleHeight(int height)
 {
-    this->widgetTitle->setFixedHeight(height);
+    this->widgetTitle->setFixedWidth(height);
 }
 
 void QUIWidget::setBtnWidth(int width)
 {
-    this->labIco->setFixedWidth(width);
+    //this->labIco->setFixedWidth(width);
     this->btnMenu->setFixedWidth(width);
-    this->btnMenu_Min->setFixedWidth(width);
-    this->btnMenu_Max->setFixedWidth(width);
-    this->btnMenu_Close->setFixedWidth(width);
 }
 
 void QUIWidget::setTitle(const QString &title)
 {
     if (this->title != title) {
         this->title = title;
-        this->labTitle->setText(title);
-        this->setWindowTitle(this->labTitle->text());
+        //this->labTitle->setText(title);
+        this->setWindowTitle(title);
     }
 }
 
@@ -1470,7 +1405,7 @@ void QUIWidget::setAlignment(Qt::Alignment alignment)
 {
     if (this->alignment != alignment) {
         this->alignment = alignment;
-        this->labTitle->setAlignment(alignment);
+        //this->labTitle->setAlignment(alignment);
     }
 }
 
@@ -1494,27 +1429,13 @@ void QUIWidget::setMainWidget(QWidget *mainWidget)
     }
 }
 
-void QUIWidget::on_btnMenu_Min_clicked()
-{
-    if (minHide) {
-        hide();
-    } else {
-        showMinimized();
-    }
-}
-
-void QUIWidget::on_btnMenu_Max_clicked()
-{
-    if (max) {
-        this->setGeometry(location);
-        setIcon(QUIWidget::BtnMenu_Normal, QUIConfig::IconNormal);
-    } else {
-        location = this->geometry();
-        this->setGeometry(qApp->desktop()->availableGeometry());
-        setIcon(QUIWidget::BtnMenu_Max, QUIConfig::IconMax);
-    }
-
-    max = !max;
+void QUIWidget::onLeftNavClicked(){
+    QPushButton *btn = (QPushButton *)sender();
+    btnFileNav->setChecked(false);
+    btnDebugNav->setChecked(false);
+    btnMCUCfgNav->setChecked(false);
+    btnProjCfgNav->setChecked(false);
+    btn->setChecked(true);
 }
 
 void QUIWidget::setMax(){
@@ -1523,14 +1444,6 @@ void QUIWidget::setMax(){
     setIcon(QUIWidget::BtnMenu_Max, QUIConfig::IconMax);
     max=true;
 }
-
-void QUIWidget::on_btnMenu_Close_clicked()
-{
-    emit closing();
-    exit(0);
-}
-
-
 
 QUIMessageBox *QUIMessageBox::self = 0;
 QUIMessageBox::QUIMessageBox(QWidget *parent) : QDialog(parent)

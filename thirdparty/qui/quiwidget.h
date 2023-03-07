@@ -265,17 +265,20 @@ protected:
 private:
     QVBoxLayout *verticalLayout1;
     QWidget *widgetMain;
-    QVBoxLayout *verticalLayout2;
+    QHBoxLayout *verticalLayout2;
     QWidget *widgetTitle;
-    QHBoxLayout *horizontalLayout4;
-    QLabel *labIco;
-    QLabel *labTitle;
+    QSpacerItem *verticalSpacer;
+
     QWidget *widgetMenu;
-    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *horizontalLayout;
     QToolButton *btnMenu;
-    QPushButton *btnMenu_Min;
-    QPushButton *btnMenu_Max;
-    QPushButton *btnMenu_Close;
+
+    QPushButton *btnFileNav;
+    QPushButton *btnMCUCfgNav;
+    QPushButton *btnProjCfgNav;
+    QPushButton *btnDebugNav;
+    QPushButton *btnAnalyzerNav;
+
     QWidget *widget;
     QVBoxLayout *verticalLayout3;
 
@@ -309,9 +312,7 @@ private slots:
     void changeStyle();             //更换样式
 
 private slots:
-    void on_btnMenu_Min_clicked();
-    void on_btnMenu_Max_clicked();
-    void on_btnMenu_Close_clicked();
+    void onLeftNavClicked();
 
 public Q_SLOTS:
     //设置部件图标

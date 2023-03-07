@@ -41,19 +41,22 @@ border-radius:0px;
 color:#BEC0C2;
 background:none;
 border-style:none;
+padding: 16px 0px 16px 0px;
 }
 
 QWidget[nav="left"] QAbstractButton:hover{
 color:#FFFFFF;
-background-color:#00BB9E;
+background: none;
+/*background-color:#00BB9E;*/
+/*background-color:rgba(51,127,209,230);*/
 }
 
 QWidget[nav="left"] QAbstractButton:checked,QWidget[nav="left"] QAbstractButton:pressed{
-color:#BEC0C2;
+color:#FFFFFF;
 border-style:solid;
 border-width:0px 0px 0px 2px;
-padding:4px 4px 4px 2px;
-border-color:#00BB9E;
+padding:16px 0px 16px 0px;
+border-color:rgba(51,127,209,230);
 background-color:#2E2F30;
 }
 
@@ -127,7 +130,7 @@ image:None;
 QToolButton#btnMenu,QPushButton#btnMenu_Min,QPushButton#btnMenu_Max,QPushButton#btnMenu_Close{
 border-radius:3px;
 color:#BEC0C2;
-padding:3px;
+padding:16px;
 margin:0px;
 background:none;
 border-style:none;
@@ -142,7 +145,8 @@ background-color:rgba(51,127,209,230);
 QPushButton#btnMenu_Close:hover{
 color:#FFFFFF;
 margin:1px 1px 2px 1px;
-background-color:rgba(238,0,0,128);
+background-color:rgba(51,127,209,230);
+/*background-color:rgba(238,0,0,128);*/
 }
 
 QRadioButton::indicator{

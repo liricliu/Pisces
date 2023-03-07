@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     a.setFont(QFont("Microsoft Yahei", 9));
-    a.setWindowIcon(QIcon(":/main.ico"));
+    a.setWindowIcon(QIcon(":/icon.png"));
 
     QUIWidget::setCode();
     QUIWidget::setTranslator(":/image/qt_zh_CN.qm");
@@ -43,16 +43,16 @@ int main(int argc, char *argv[])
     qui.setVisible(QUIWidget::BtnMenu, true);
 
     //设置标题栏高度
-    qui.setTitleHeight(0);
+    qui.setTitleHeight(60);
 
     //设置按钮宽度
-    qui.setBtnWidth(30);
+    qui.setBtnWidth(60);
 
     //设置左上角图标-图形字体
     //qui.setIconMain(QChar(0xf099), 11);
 
     //设置左上角图标-图片文件
-    //qui.setPixmap(QUIWidget::Lab_Ico, ":/main.ico");
+    //qui.setPixmap(QUIWidget::Lab_Ico, ":/icon.png");
 
     qui.setMax();
 
